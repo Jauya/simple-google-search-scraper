@@ -14,8 +14,13 @@ export async function getSuggestions(keywords: string, apikey: string) {
         return items
     } catch (error) {
         // Return error message for API key issues or query limits
+        if (error) {
+            return {
+                error: "La clave API no es válida o se ha excedido el límite de consultas"
+            }
+        }
         return {
-            error: "La clave API no es válida o se ha excedido el límite de consultas"
+            error: "Ha ocurrido un error inesperado"
         }
     }
 }
