@@ -88,10 +88,10 @@ export default function Suggestions() {
                   handleCopy(
                     resultType == "relatedSearches"
                       ? search.relatedSearches.map(
-                          (relatedSearch) => relatedSearch.query
+                          (relatedSearch) => relatedSearch
                         )
                       : search.peopleAlsoAsk.map(
-                          (peopleAsk) => peopleAsk.question
+                          (peopleAsk) => peopleAsk
                         ),
                     index,
                     e
@@ -105,15 +105,15 @@ export default function Suggestions() {
                   {resultType == "relatedSearches"
                     ? search.relatedSearches.map((relatedSearch, i) => (
                         <SuggestionItem
-                          key={relatedSearch.query + i}
-                          suggestion={relatedSearch.query}
+                          key={relatedSearch + i}
+                          suggestion={relatedSearch}
                           index={i}
                         />
                       ))
                     : search.peopleAlsoAsk.map((peopleAsk, i) => (
                         <SuggestionItem
-                          key={peopleAsk.question + i}
-                          suggestion={peopleAsk.question}
+                          key={peopleAsk + i}
+                          suggestion={peopleAsk}
                           index={i}
                         />
                       ))}

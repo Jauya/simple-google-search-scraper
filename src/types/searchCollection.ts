@@ -1,8 +1,6 @@
-import { PeopleAlsoAsk, RelatedSearch } from "./searchData";
-
 export type SearchCollection = {
   uuid: string;
-  relatedSearches: RelatedSearch[];
-  peopleAlsoAsk: PeopleAlsoAsk[];
+  relatedSearches: string[];
+  peopleAlsoAsk: string[];
   date: number;
 };

@@ -28,7 +28,7 @@ export const useSearchStore = create<SuggestionStore>()(
     }),
     {
       name: "suggestion-store",
-      partialize: (state) => ({ searches: state.searchCollection }),
+      partialize: (state) => ({ searchCollection: state.searchCollection }),
     }
   )
 );

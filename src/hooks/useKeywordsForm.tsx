@@ -1,7 +1,7 @@
 import { searchSerperAction } from "@/actions/serperActions";
 import { SearchCollection } from "@/types/searchCollection";
-import { PeopleAlsoAsk, RelatedSearch } from "@/types/searchData";
 import { delay } from "@/utils/delay";
+import { filterKeywords } from "@/utils/filterKeywords";
 import { separateKeywords } from "@/utils/separateKeywords";
 import { FormEvent, RefObject } from "react";
 
@@ -50,8 +50,8 @@ export function useKeywordsForm({
       return;
     }
 
-    const peopleAlsoAsk: PeopleAlsoAsk[] = [];
-    const relatedSearches: RelatedSearch[] = [];
+    const peopleAlsoAsk: string[] = [];
+    const relatedSearches: string[] = [];
 
     for (const keyword of keywords) {
       await delay(2000);
@@ -60,12 +60,17 @@ export function useKeywordsForm({
         stopWithError(resData.message);
         break;
       }
-      if (resData.peopleAlsoAsk) {
-        peopleAlsoAsk.push(...resData.peopleAlsoAsk);
+      if (resData.peopleAlsoAsk?.length) {
+        peopleAlsoAsk.push(
+          ...resData.peopleAlsoAsk.map((peopleAsk) => peopleAsk.question)
+        );
       }
-      if (resData.relatedSearches) {
-        relatedSearches.push(...resData.relatedSearches);
+      if (resData.relatedSearches?.length) {
+        relatedSearches.push(
+          ...resData.relatedSearches.map((relatedSearch) => relatedSearch.query)
+        );
       }
+      console.log(resData);
     }
 
     if (peopleAlsoAsk.length === 0 && relatedSearches.length === 0) {
@@ -73,8 +78,8 @@ export function useKeywordsForm({
     } else {
       const newSearchCollection: SearchCollection = {
         uuid: crypto.randomUUID(),
-        peopleAlsoAsk,
-        relatedSearches,
+        peopleAlsoAsk: filterKeywords(peopleAlsoAsk),
+        relatedSearches: filterKeywords(relatedSearches),
         date: Date.now(),
       };
       setLoading(false);
