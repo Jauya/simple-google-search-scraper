@@ -1,4 +1,4 @@
-export const filterKeywords = (keywords: string[]) => {
+export const filterKeywords = (keywords: string[], words: string[] = []) => {
   const filterWords = [
     "pdf",
     "pdfs",
@@ -11,6 +11,7 @@ export const filterKeywords = (keywords: string[]) => {
     "carrera",
     "curso",
     "cursos",
+    ...words
   ]; // Palabras de filtro estáticas
   const uniqueKeywords = [...new Set(keywords)]; // Eliminar duplicados
 

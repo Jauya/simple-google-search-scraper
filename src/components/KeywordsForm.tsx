@@ -2,6 +2,7 @@
 import { useKeywordsForm } from "@/hooks/useKeywordsForm";
 import { useApikeyStore } from "@/store/apikeyStore";
 import { useSearchStore } from "@/store/searchStore";
+import { separateKeywords } from "@/utils/separateKeywords";
 import { useRef, useState } from "react";
 
 export default function KeywordsForm() {
@@ -10,6 +11,7 @@ export default function KeywordsForm() {
   const [error, setError] = useState<string | null>(null);
 
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [keywordsLength, setKeywordsLength] = useState(0);
 
   const { handleSubmit, verifyApikey } = useKeywordsForm({
     apikey,
@@ -18,7 +20,11 @@ export default function KeywordsForm() {
     textareaRef,
     setError,
   });
-
+  const handleTextareaChange = () => {
+    const value = textareaRef.current?.value ?? "";
+    const separated = separateKeywords(value);
+    setKeywordsLength(separated.length);
+  };
   return (
     <>
       <form className="flex flex-col gap-4 p-2" onSubmit={handleSubmit}>
@@ -32,13 +38,16 @@ export default function KeywordsForm() {
           />
         </label>
         <label className="flex flex-col gap-1">
-          <span className="font-semibold text-sm">Palabras clave</span>
+          <span className="font-semibold text-sm">
+            Palabras clave ({keywordsLength}/150)
+          </span>
           <textarea
             className="bg-zinc-800/50 disabled:text-white/40 p-2 rounded-lg outline-none transition-colors duration-300"
             disabled={loading}
             ref={textareaRef}
             placeholder="Escribe aqui..."
             rows={8}
+            onChange={handleTextareaChange}
           />
         </label>
         <button

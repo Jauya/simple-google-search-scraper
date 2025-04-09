@@ -1,4 +1,5 @@
 import { searchSerperAction } from "@/actions/serperActions";
+import { useSearchStore } from "@/store/searchStore";
 import { SearchCollection } from "@/types/searchCollection";
 import { delay } from "@/utils/delay";
 import { filterKeywords } from "@/utils/filterKeywords";
@@ -20,6 +21,7 @@ export function useKeywordsForm({
   textareaRef,
   setError,
 }: UseKeywordsFormProps) {
+  const { filterWords } = useSearchStore();
   const verifyApikey = apikey.length > 0;
 
   const start = () => {
@@ -41,8 +43,8 @@ export function useKeywordsForm({
       stopWithError("Debes ingresar al menos una palabra clave");
       return;
     }
-    if (keywords.length > 99) {
-      stopWithError("Solo puedes ingresar 99 palabras clave");
+    if (keywords.length > 150) {
+      stopWithError("Solo puedes ingresar 150 palabras clave");
       return;
     }
     if (!verifyApikey) {
@@ -70,7 +72,6 @@ export function useKeywordsForm({
           ...resData.relatedSearches.map((relatedSearch) => relatedSearch.query)
         );
       }
-      console.log(resData);
     }
 
     if (peopleAlsoAsk.length === 0 && relatedSearches.length === 0) {
@@ -78,8 +79,8 @@ export function useKeywordsForm({
     } else {
       const newSearchCollection: SearchCollection = {
         uuid: crypto.randomUUID(),
-        peopleAlsoAsk: filterKeywords(peopleAlsoAsk),
-        relatedSearches: filterKeywords(relatedSearches),
+        peopleAlsoAsk: filterKeywords(peopleAlsoAsk, filterWords),
+        relatedSearches: filterKeywords(relatedSearches, filterWords),
         date: Date.now(),
       };
       setLoading(false);
