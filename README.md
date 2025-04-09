@@ -1,36 +1,92 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Simple Google Search Scraper
 
-## Getting Started
+Una herramienta moderna y eficiente para extraer sugerencias de búsqueda de Google, incluyendo "People Also Ask" y "Related Searches". Construida con Next.js 15, TypeScript y Tailwind CSS.
 
-First, run the development server:
+## Características Principales
 
+- 🕵️‍♂️ Extracción de sugerencias de búsqueda de Google
+- 🔄 Historial de búsquedas con fecha y hora
+- 📝 Gestión de palabras clave filtradas
+- 🔄 Soporte para "People Also Ask" y "Related Searches"
+- 🔄 Límite de 150 palabras clave
+- 📋 Copiado masivo de resultados
+- 🔄 Interfaz de usuario moderna y responsive
+
+## Requisitos Previos
+
+- Node.js 18+
+- npm o yarn
+- API Key de Serper.dev
+
+## Instalación
+
+1. Clona el repositorio:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/Jauya/simple-google-search-scraper.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Instala las dependencias:
+```bash
+npm install
+# o
+yarn install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Inicia el servidor de desarrollo:
+```bash
+npm run dev
+# o
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+La aplicación estará disponible en `http://localhost:3000`
 
-## Learn More
+## Uso de la Aplicación
 
-To learn more about Next.js, take a look at the following resources:
+1. **Formulario de Palabras Clave**
+   - Escribe tus palabras clave en el textarea
+   - Límite máximo de 150 palabras clave
+   - El formulario muestra el contador de palabras clave actuales
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. **Palabras Filtradas**
+   - Agrega palabras a la lista de filtrado
+   - Elimina palabras individuales haciendo clic en ellas
+   - Limpiar todos los filtros con el botón "Limpiar filtros"
+   - Palabras comunes filtradas por defecto: "pdf", "gratis", "ejemplo", etc.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+3. **Resultados de Búsqueda**
+   - Ver "People Also Ask" o "Related Searches"
+   - Historial de búsquedas con fecha y hora
+   - Copiar resultados con un solo clic
+   - Eliminar búsquedas individuales del historial
 
-## Deploy on Vercel
+## Estructura del Proyecto
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+src/
+├── app/              # Páginas de la aplicación
+├── components/       # Componentes reutilizables
+├── hooks/           # Custom hooks
+├── store/           # Estado global con Zustand
+├── types/           # Tipos de TypeScript
+├── utils/           # Funciones utilitarias
+└── lib/             # Funcionalidad core
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tecnologías Utilizadas
+
+- **Frontend**
+  - Next.js 15
+  - React 19
+  - TypeScript
+  - Tailwind CSS
+  - Zustand (gestión de estado)
+
+- **Backend**
+  - Puppeteer (scraping)
+  - Axios (peticiones HTTP)
+  - Apify Client (opcional)
+
+## Autor
+
+Desarrollado por Jauya
