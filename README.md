@@ -9,8 +9,6 @@ Una herramienta moderna y eficiente para extraer sugerencias de búsqueda de Goo
 - 📝 Gestión de palabras clave filtradas
 - 🔄 Soporte para "People Also Ask" y "Related Searches"
 - 🔄 Límite de 150 palabras clave
-- 📋 Copiado masivo de resultados
-- 🔄 Interfaz de usuario moderna y responsive
 
 ## Requisitos Previos
 
