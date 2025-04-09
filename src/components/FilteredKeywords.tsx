@@ -95,8 +95,8 @@ export default function FilteredKeywords() {
         </div>
       </div>
       <span className="text-xs text-gray-500">
-        Algunas de las palabras más comunes que se filtran: "pdf", "gratis",
-        "gratuito", "ejemplo", "carrera", "cursos", etc.
+        Algunas de las palabras más comunes que se filtran: &quot;pdf&quot;, &quot;gratis&quot;,
+        &quot;gratuito&quot;, &quot;ejemplo&quot;, &quot;carrera&quot;, &quot;cursos&quot;, etc.
       </span>
     </div>
   );
